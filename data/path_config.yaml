@@ -1,0 +1,96 @@
+coco:
+  classification:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_val2014.jsonl'
+  classification_with_context:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_val2014.jsonl'
+  retrieval_mean:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_2014val_caption.json'
+  retrieval:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_2014val_caption_random1.jsonl'
+  classification_with_context_multi_qs:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_val2014.jsonl'
+  llm_retrieval_classification_multi_qs:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/coco/coco_2014val_caption_random1.jsonl'
+
+vqav2:
+  vqa:
+    image_folder: 'datasets/coco/val2014'
+    question_file: 'datasets/vqav2/coco2014val_questions.jsonl'
+
+textvqa:
+  retrieval:
+    image_folder: 'datasets/textvqa/train_images'
+    data_file: 'datasets/textvqa/llava_captions.jsonl'
+  vqa:
+    image_folder: 'datasets/textvqa/train_images'
+    question_file: datasets/textvqa/llava_textvqa_val_v051_ocr.jsonl
+    answers_file: 'datasets/textvqa/TextVQA_0.5.1_val.json'
+
+sqa:
+  retrieval:
+    image_folder: 'datasets/scienceqa/test'
+    data_file: 'datasets/scienceqa/captions.jsonl'
+
+pope:
+  retrieval:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/pope/llava_captions.jsonl'
+  classification:
+    image_folder: 'datasets/coco/val2014'
+    data_file: 'datasets/pope/coco_cls_labels.jsonl'
+
+mme:
+  retrieval:
+    image_folder: 'datasets/mme/MME_Benchmark_release_version'
+    data_file: 'datasets/mme/llava_captions.jsonl'
+
+imagenet:
+  classification:
+    image_folder: datasets/imagenet/val
+    data_file: datasets/imagenet/imagenet_val2012_subset5000.jsonl
+  classification_with_context:
+    image_folder: datasets/imagenet/val
+    data_file: datasets/imagenet/imagenet_val2012_subset5000.jsonl
+  classification_with_context_multi_qs:
+    image_folder: datasets/imagenet/val
+    data_file: datasets/imagenet/imagenet_val2012_subset5000.jsonl
+
+
+food101:
+  classification:
+    image_folder: datasets/food-101/images
+    data_file: datasets/food-101/meta/test_annotations.jsonl
+  classification_with_context:
+    image_folder: datasets/food-101/images
+    data_file: datasets/food-101/meta/test_annotations.jsonl
+  classification_with_context_multi_qs:
+    image_folder: datasets/food-101/images
+    data_file: datasets/food-101/meta/test_annotations.jsonl
+
+cub:
+  classification:
+    image_folder: datasets/CUB/images
+    data_file: datasets/CUB/annotations.jsonl
+  classification_with_context:
+    image_folder: datasets/CUB/images
+    data_file: datasets/CUB/annotations.jsonl
+  classification_with_context_multi_qs:
+    image_folder: datasets/CUB/images
+    data_file: datasets/CUB/annotations.jsonl
+
+stanford_cars:
+  classification:
+    image_folder: datasets/stanford_cars/cars_train/cars_train
+    data_file: datasets/stanford_cars/train_annotation_llava.jsonl
+  classification_with_context:
+    image_folder: datasets/stanford_cars/cars_train/cars_train
+    data_file: datasets/stanford_cars/train_annotation_llava.jsonl
+  classification_with_context_multi_qs:
+    image_folder: datasets/stanford_cars/cars_train/cars_train
+    data_file: datasets/stanford_cars/train_annotation_llava.jsonl

@@ -1,0 +1,52 @@
+DIFGSM:
+  eps: 0.03137
+  alpha: 0.00784
+  steps: 10
+  decay: 0.0
+  resize_rate: 0.9
+  diversity_prob: 0.5
+  random_start: false
+
+EADEN:
+  kappa: 0
+  lr: 0.01
+  binary_search_steps: 9
+  max_iterations: 100
+  abort_early: true
+  initial_const: 0.001
+  beta: 0.001
+
+EADL1:
+  kappa: 0
+  lr: 0.01
+  steps: 100
+
+BIM:
+  eps: 0.03137
+  alpha: 0.00784
+  steps: 10
+
+PGD:
+  normal:
+    steps: 20
+  strong:
+    eps: 0.2
+    steps: 40
+
+APGD:
+  strong:
+    eps: 0.2
+    steps: 40
+  normal:
+    steps: 20
+
+CW:
+  strong:
+    c: 100
+    steps: 75
+    lr: 0.05
+  normal:
+    c: 20
+    lr: 0.05
+
+  
