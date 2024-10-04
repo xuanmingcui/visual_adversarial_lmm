@@ -55,3 +55,7 @@ By default we save the images under ```datasets/```, generated adversarial image
    - To evaluate for classification, run the above code but do not pass attack_name.
    - To evaluate caption retrieval, use ```scripts/evaluate_caption_retreieval.py```. Checkout ```scripts/eval_caption_retrieval_llava(blip).sh``` for sample runs.
    - To evaluate VQA, please refer to each dataset under ```dasta/```.
+
+### Acknowledgement
+
+This repository is using code from [LLaVA](https://github.com/haotian-liu/LLaVA), [LAVIS](https://github.com/salesforce/LAVIS),  [torchattacks](https://github.com/Harry24k/adversarial-attacks-pytorch).
