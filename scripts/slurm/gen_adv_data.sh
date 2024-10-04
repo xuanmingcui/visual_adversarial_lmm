@@ -48,12 +48,11 @@ for attack_params in "default" "moderate"; do
             --model-path ${model_paths[${model_name}]} \
             --dataset "$dataset" \
             --model-type pretrain \
-            --save_image 'True' \
+            --save_image  \
             --image_ext 'jpg' \
             --task $task \
             --attack_name $attack_name \
             --attack_params $attack_params \
-            --use_descriptors 'False' \
             --batch_size $batch_size \
             --num_workers $num_workers \
 

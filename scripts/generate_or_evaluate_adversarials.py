@@ -1,9 +1,3 @@
-"""
-    This file is used to generate adversarial examples for a given model, dataset
-"""
-
-
-
 from tqdm import tqdm
 import json
 import torch
@@ -72,7 +66,7 @@ def generate_adversarials_dataset(model, args):
             # CW overflows with fp16
             images = images.half()
             
-        if args.attack_name and args.attack_name != 'None':
+        if args.attack_name:
             model.attack_mode = True
             images = attack(images, labels=labels)
             if args.save_image:
@@ -111,7 +105,7 @@ if __name__ == "__main__":
                                                                                "classification_with_context_multi_qs", 
                                                                                "llm_retrieval_classification_multi_qs"])
     parser.add_argument("--dataset", type=str, default="coco")
-    parser.add_argument("--save_image", type=boolean_string, required=False, default='False')
+    parser.add_argument("--save_image", action='store_true', default=False)
     parser.add_argument("--batch_size", type=int, required=False, default=1, nargs='?')
     parser.add_argument("--num_workers", type=int, required=False, default=1, nargs='?')
     parser.add_argument("--model-type", type=str, default=None)
@@ -125,13 +119,13 @@ if __name__ == "__main__":
     parser.add_argument("--num_beams", type=int, default=1)
 
     # whether to use descriptors for Imagenet label retrieval
-    parser.add_argument("--use_descriptors", type=boolean_string, default='False')
+    parser.add_argument("--use_descriptors", action="store_true", default=False)
 
     ## =============== args for adv attack =================
-    parser.add_argument("--attack_name", type=str, default="None")
-    parser.add_argument("--attack_params", type=str, default='default')
+    parser.add_argument("--attack_name", type=str, default=None)
+    parser.add_argument("--attack_params", type=str, default='strong')
     # whether to attack descriptors or attack plain labels and use descriptors to do prediction
-    parser.add_argument("--attack_descriptors", type=boolean_string, default='False')
+    parser.add_argument("--attack_descriptors", action="store_true", default=False)
     parser.add_argument("--transfer", action='store_true')
 
     args = parser.parse_args()
@@ -154,7 +148,7 @@ if __name__ == "__main__":
         assert not os.path.exists(args.save_folder), f"Folder {args.save_folder} already exists. It's likely the targeted adversarial dataset is already created."
         os.makedirs(args.save_folder)
 
-    if args.attack_name and args.attack_name != "None":
+    if args.attack_name:
         if args.attack_params in ['strong', 'normal']:
             args.attack_params = load_yaml_parameters('attacks/config.yaml', args.attack_name)[args.attack_params]
         else:

@@ -34,7 +34,7 @@ for params in "normal" "strong"; do
             IFS="," read -r attack_name dataset_id <<< "$attack"
             mkdir -p adv_llava/results/logs/$dataset/$task
             export log_file="adv_llava/results/logs/${dataset}/${task}/${attack_name}/adv${dataset_id}_${params}_${model_path}_${model_type}_id:${SLURM_JOB_ID}.log"
-            # export log_file="adv_llava/results/logs/${dataset}/${task}/orig_${model_path}_${model_type}_id:${SLURM_JOB_ID}.log"
+            # export log_file="results/logs/${dataset}/${task}/orig_${model_path}_${model_type}_id:${SLURM_JOB_ID}.log"
             exec &> $log_file
             echo "Starting time: $(date)" 
             # Run python
@@ -42,14 +42,12 @@ for params in "normal" "strong"; do
                 --model-path ${model_path} \
                 --dataset "$dataset" \
                 --model-type ${model_type} \
-                --save_image 'False' \
                 --image_ext 'pt' \
                 --task $task \
                 --attack_name 'None' \
                 --attack_params 'None' \
-                --use_descriptors 'False' \
                 --image-folder "adv_datasets/${dataset}/${task}/${attack_name}/blip2_attack_params:${params}_${dataset_id}" \
-                --query "Question: what is th make, model, body-style and year of this car? Answer: " \
+                --query "Question: what is the make, model, body-style and year of this car? Answer: " \
                 --batch_size $batch_size \
                 --num_workers $num_workers
 
