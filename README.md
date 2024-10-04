@@ -30,8 +30,7 @@ By default we save the images under ```datasets/```, generated adversarial image
    - Food101: we use its test set.
    - Stanford Cars: we use its train set because the test set does not contain ground-truth.
    - VQA: we use vqav2, SQA, POPE, TextVQA and MME. The download and setup can be found under the original LLaVA [codebase](https://github.com/haotian-liu/LLaVA/blob/main/docs/Evaluation.md).
-3. Attacks: we use attacks implemented from [torchattack](COCO: we use COCO2014 validation set. We provide the caption file under data/coco/coco_2014val_caption.json
-). We use two parameter settings: strong and normal. Parameters we used can be found in attacks/config.yaml.
+3. Attacks: we use attacks implemented from [torchattack](https://github.com/Harry24k/adversarial-attacks-pytorch). We use two parameter settings: strong and normal. Default parameters can be found in attacks/config.yaml.
 4. Generate adversarial images
    - To generate adversarial with different tasks (classification/retrieval/classification_with_context), run
      ```bash
