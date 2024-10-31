@@ -53,7 +53,7 @@ By default we save the images under ```datasets/```, generated adversarial image
 6. Evaluate
    - To evaluate for classification, run the above code but do not pass attack_name.
    - To evaluate caption retrieval, use ```scripts/evaluate_caption_retreieval.py```. Checkout ```scripts/eval_caption_retrieval_llava(blip).sh``` for sample runs.
-   - To evaluate VQA, please refer to each dataset under ```dasta/```.
+   - To evaluate VQA, please refer to each dataset under ```data/```.
 
 ### Acknowledgement
 
