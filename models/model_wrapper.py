@@ -17,12 +17,9 @@ from models.llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAU
 from models.llava.conversation import conv_templates, SeparatorStyle
 from utils.helpers import make_descriptor_sentence
 
-from models.MiniGPT.minigpt4.common.vqa_tools.VQA.PythonHelperTools.vqaTools.vqa import VQA
-from models.MiniGPT.minigpt4.common.vqa_tools.VQA.PythonEvaluationTools.vqaEvaluation.vqaEval import VQAEval
-
-from models.MiniGPT.minigpt4.common.eval_utils import prepare_texts as minigpt_prepare_texts, init_model as minigpt_init_model, eval_parser
-from models.MiniGPT.minigpt4.conversation.conversation import CONV_VISION_minigptv2
-from models.MiniGPT.minigpt4.common.config import Config
+# from models.MiniGPT.minigpt4.common.eval_utils import prepare_texts as minigpt_prepare_texts, init_model as minigpt_init_model, eval_parser
+# from models.MiniGPT.minigpt4.conversation.conversation import CONV_VISION_minigptv2
+# from models.MiniGPT.minigpt4.common.config import Config
 
 # For encoding labels/captions and the generated response, we use the same CLIP text encoder
 clip_text_tokenizer = AutoTokenizer.from_pretrained('openai/clip-vit-large-patch14')
@@ -321,66 +318,66 @@ class GenerativeBLIP(nn.Module):
         self.text_label_embeds = encode_labels_clip(self, labels)
         return self.text_label_embeds
 
-class MiniGPT(nn.Module):
+# class MiniGPT(nn.Module):
     
-    def __init__(self, args) -> None:
-        """
-        *** Only support batch_size=1
-        """
-        super().__init__()
-        self.args = args
-        self.model, self.vis_processors = minigpt_init_model(args)
-        conv_temp = CONV_VISION_minigptv2.copy()
-        conv_temp.system = ""
-        self.model.eval()
+#     def __init__(self, args) -> None:
+#         """
+#         *** Only support batch_size=1
+#         """
+#         super().__init__()
+#         self.args = args
+#         self.model, self.vis_processors = minigpt_init_model(args)
+#         conv_temp = CONV_VISION_minigptv2.copy()
+#         conv_temp.system = ""
+#         self.model.eval()
         
-        self.text_tokenizer = clip_text_tokenizer
-        self.text_encoder = clip_text_encoder
-        self.processor = clip_processor
+#         self.text_tokenizer = clip_text_tokenizer
+#         self.text_encoder = clip_text_encoder
+#         self.processor = clip_processor
     
-    def preprocess_image(self, image):
-        return self.vis_processors(image)
+#     def preprocess_image(self, image):
+#         return self.vis_processors(image)
 
-    def generate(self, text, image):
-        if len(image.shape) == 3:
-            image = image.unsqueeze(0) # make it a batch
+#     def generate(self, text, image):
+#         if len(image.shape) == 3:
+#             image = image.unsqueeze(0) # make it a batch
         
-        if type(text) == tuple or type(text) == list or type(text) == torch.tensor:
-            text = text[0]
-        text = minigpt_prepare_texts(text)
+#         if type(text) == tuple or type(text) == list or type(text) == torch.tensor:
+#             text = text[0]
+#         text = minigpt_prepare_texts(text)
 
-        with torch.inference_mode():
-            answers = model.generate(image, text, max_new_tokens=20, do_sample=False)
-            answer = answer.lower().replace('<unk>','').strip()
+#         with torch.inference_mode():
+#             answers = model.generate(image, text, max_new_tokens=20, do_sample=False)
+#             answer = answer.lower().replace('<unk>','').strip()
         
-    def forward(self, images, text, **kwargs):
-        """
-        Forward pass to generate logits for image-caption/label retrieval
-        if text is not None, then to return contrastive loss
-        otherwise, return logits for classification based on itm or itc
-        """
+#     def forward(self, images, text, **kwargs):
+#         """
+#         Forward pass to generate logits for image-caption/label retrieval
+#         if text is not None, then to return contrastive loss
+#         otherwise, return logits for classification based on itm or itc
+#         """
 
-        with torch.inference_mode():
+#         with torch.inference_mode():
 
-            response = self.generate(text, images)
-            if 'classification' in self.args.task:
-                response = f"a photo of {response}."
-            text_response = self.text_tokenizer(text=response, padding=True, truncation=True, return_tensors="pt")['input_ids'].cuda()
-            text_response_embed = F.normalize(self.text_encoder(text_response).text_embeds, p=2., dim=-1)
+#             response = self.generate(text, images)
+#             if 'classification' in self.args.task:
+#                 response = f"a photo of {response}."
+#             text_response = self.text_tokenizer(text=response, padding=True, truncation=True, return_tensors="pt")['input_ids'].cuda()
+#             text_response_embed = F.normalize(self.text_encoder(text_response).text_embeds, p=2., dim=-1)
             
-            logits = torch.matmul(text_response_embed, self.text_label_embeds.t())
+#             logits = torch.matmul(text_response_embed, self.text_label_embeds.t())
         
-        return logits
+#         return logits
 
-    def encode_texts(self, texts):
-        with torch.no_grad():
-            text_embeds = self.text_encoder(self.text_tokenizer(texts, padding=True, truncation=True, return_tensors="pt")['input_ids'].cuda()).text_embeds
+#     def encode_texts(self, texts):
+#         with torch.no_grad():
+#             text_embeds = self.text_encoder(self.text_tokenizer(texts, padding=True, truncation=True, return_tensors="pt")['input_ids'].cuda()).text_embeds
         
-        return F.normalize(text_embeds, dim=-1)
+#         return F.normalize(text_embeds, dim=-1)
     
-    def set_encoded_labels(self, labels):
-        self.text_label_embeds = encode_labels_clip(self, labels)
-        return self.text_label_embeds
+#     def set_encoded_labels(self, labels):
+#         self.text_label_embeds = encode_labels_clip(self, labels)
+#         return self.text_label_embeds
 
 
 
@@ -393,8 +390,10 @@ def get_model(args):
         model = BLIP2CL(args)
     elif 'instruct' or 'blip2_t5' in args.model_path.lower():
         model = GenerativeBLIP(args)
-    elif 'minigpt' in args.model_path.lower():
-        model = MiniGPT(args)
+    # elif 'minigpt' in args.model_path.lower():
+    #     model = MiniGPT(args)
+    else:
+        raise ValueError(f"Model {args.model_path} not supported.")
     
     model.eval()
     return model

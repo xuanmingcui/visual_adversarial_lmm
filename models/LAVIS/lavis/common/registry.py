@@ -197,8 +197,11 @@ class Registry:
             from lavis.common.registry import registry
         """
         assert isinstance(path, str), "All path must be str."
-        if name in cls.mapping["paths"]:
-            raise KeyError("Name '{}' already registered.".format(name))
+        # if name in cls.mapping["paths"]:
+        #     if cls.mapping["paths"][name] == path:
+        #         return
+        #     else:
+        #         raise KeyError("Name '{}' already registered.".format(name))
         cls.mapping["paths"][name] = path
 
     @classmethod

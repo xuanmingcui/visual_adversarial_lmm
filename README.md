@@ -7,8 +7,22 @@ Authors: Xuanming Cui, Alejandro Aparcedo, Young Kyun Jang, Ser-Nam Lim
 ### Requirements
 
 ```bash
-torch, torchvision, transformers, tqdm, accelerate
+torch, torchvision, transformers==4.31.0, tqdm, accelerate, numpy<2.0.0
 ```
+
+First install requirements with 
+
+```bash
+pip install -r requirements.txt
+```
+
+Then build the LAVIS requirements by
+
+```bash
+cd models/LAVIS
+pip install -e .
+```
+
 
 ### Code
 
