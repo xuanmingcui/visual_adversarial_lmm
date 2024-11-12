@@ -13,13 +13,12 @@ params="strong"
 image_folder="adv_datasets/coco/classification/CW/clip336_attack_params:default_289354"
 ##### end of params to change #####
 
-shared_folder="/groups/sernam"
 result_folder="results/responses/vqav2/${attack_name}/${params}_llava1.5"
 result_file="datasetID:${dataset_id}_llava-v1.5-13b.json"
-llava="/groups/sernam/ckpts/LLAMA-on-LLaVA"
+llava="ckpts/LLAMA-on-LLaVA"
 llavav2="liuhaotian/llava-v1.5-13b"
 
-export log_file="/${shared_folder}/adv_llava/results/logs/vqav2/vqa/${attack_name}/adv${dataset_id}_${params}_llava1.5_13b_response_$SLURM_JOB_ID.log"
+export log_file="results/logs/vqav2/vqa/${attack_name}/adv${dataset_id}_${params}_llava1.5_13b_response_$SLURM_JOB_ID.log"
 exec &> $log_file
 
 module load cuda/cuda-12.1
@@ -32,11 +31,11 @@ export SLURM_JOB_ID=$SLURM_JOB_ID
 rm "./slurm-${SLURM_JOB_ID}.out"
 
 # Run python
-~/anaconda3/envs/adv_env/bin/python3.9 ~/projects/LLaVA/vqav2/generate_answers_llavav2.py \
+python data/vqav2/generate_answers_llavav2.py \
     --model-path "$llavav2" \
     --image-folder "$image_folder" \
     --result-file "${result_folder}/${result_file}" \
-    --question-file "/groups/sernam/datasets/vqa/vqav2/coco2014val_questions.jsonl" \
+    --question-file "data/vqav2/coco2014val_questions.jsonl" \
     --temperature 0 \
     --image_ext pt \
     --conv-mode vicuna_v1_1
@@ -45,7 +44,7 @@ sleep 5
 
 echo "==> Evaluation start below:"
 
-~/anaconda3/envs/adv_env/bin/python3.9 /home/scui/projects/LLaVA/vqav2/eval_vqav2_answers.py \
+python data/vqav2/eval_vqav2_answers.py \
     --resFile "${result_folder}/${result_file}" \
     --resultFolder $result_folder
 

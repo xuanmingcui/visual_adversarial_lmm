@@ -149,7 +149,7 @@ if __name__ == "__main__":
     parser.add_argument("--result-file", type=str, default=None, required=True)
     parser.add_argument("--image_ext", type=str, default='pt')
     parser.add_argument("--query_formatter", type=str, default='{}\nAnswer the question using a single word or phrase.')
-    parser.add_argument("--question-file", type=str, default="/groups/sernam/datasets/vqa/vqav2/coco2014val_questions.jsonl")
+    parser.add_argument("--question-file", type=str, default="data/vqav2/coco2014val_questions.jsonl")
     parser.add_argument("--conv-mode", type=str, default="vicuna_v1_1")
     parser.add_argument("--num-chunks", type=int, default=1)
     parser.add_argument("--chunk-idx", type=int, default=0)

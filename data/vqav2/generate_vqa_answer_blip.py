@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--image-folder", type=str, required=True)
     parser.add_argument("--result-file", type=str, required=True)
     parser.add_argument("--image_ext", type=str, default="pt")
-    parser.add_argument("--question-file", type=str, default="/groups/sernam/datasets/vqa/vqav2/coco2014val_questions.jsonl")
+    parser.add_argument("--question-file", type=str, default="data/vqav2/coco2014val_questions.jsonl")
     parser.add_argument("--query_formatter", type=str, default="Question: {} Short answer:")
     args = parser.parse_args()
     for k,v in vars(args).items():

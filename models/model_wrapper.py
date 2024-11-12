@@ -403,7 +403,7 @@ if __name__ == '__main__':
 
     processor = AutoProcessor.from_pretrained("Salesforce/blip2-opt-2.7b")
     model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip2-opt-2.7b", torch_dtype=torch.float16).cuda().eval()
-    image = "/groups/sernam/datasets/coco/val2014/COCO_val2014_000000000192.jpg"
+    image = "data/coco/val2014/COCO_val2014_000000000192.jpg"
     image = Image.open(image).convert('RGB')
     prompt = "What is the main object in this image? Answer: "
     inputs = processor(images=image, text=prompt, return_tensors="pt").to('cuda', torch.float16)

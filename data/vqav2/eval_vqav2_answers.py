@@ -117,12 +117,12 @@ def evaluate(args):
 if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
-    parser.add_argument("--annFile", type=str, default='/groups/sernam/datasets/vqa/vqav2/coco2014val_annotations.json')
-    parser.add_argument("--quesFile", type=str, required=False, default='/groups/sernam/datasets/vqa/vqav2/coco2014val_questions.json')
-    parser.add_argument("--imgDir", type=str, required=False, default='/groups/sernam/datasets/coco/val2014')
+    parser.add_argument("--annFile", type=str, default='data/vqav2/coco2014val_annotations.json')
+    parser.add_argument("--quesFile", type=str, required=False, default='data/vqav2/coco2014val_questions.json')
+    parser.add_argument("--imgDir", type=str, required=False, default='data/coco/val2014')
     parser.add_argument("--resFile", type=str, required=True, default=None)
     parser.add_argument("--resultFolder", type=str, required=True, default=None)
-    parser.add_argument("--outputFile", type=str, required=False, default='/groups/sernam/adv_llava/results/vqav2_results.txt')
+    parser.add_argument("--outputFile", type=str, required=False, default='results/vqav2_results.txt')
 
     args = parser.parse_args()
     evaluate(args)

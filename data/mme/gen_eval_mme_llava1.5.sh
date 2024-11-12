@@ -28,17 +28,17 @@ for attack in "APGD,278430"; do
     echo "Starting time: $(date)" 
 
     # Run python
-    ~/anaconda3/envs/adv_env/bin/python3.9 -m generate_answers_llava2 \
+    python -m generate_answers_llava2 \
         --model-path liuhaotian/llava-v1.5-13b \
         --question-file datasets/vqa/mme/mme_landmarks_only.jsonl\
         --image-folder $image_folder \
         --result-file ${result_folder}/result.jsonl \
         --image_ext jpg \
 
-    ~/anaconda3/envs/adv_env/bin/python3.9 /home/scui/projects/LLaVA/mme/convert_answer_to_mme.py \
+    python /home/scui/projects/LLaVA/mme/convert_answer_to_mme.py \
         --result-folder ${result_folder}
 
-    ~/anaconda3/envs/adv_env/bin/python3.9 datasets/vqa/mme/eval_tool/calculation.py \
+    python datasets/vqa/mme/eval_tool/calculation.py \
         --results_dir ${result_folder}
 
     echo "Ending time: $(date)" 

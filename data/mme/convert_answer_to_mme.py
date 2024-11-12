@@ -43,7 +43,7 @@ if __name__ == "__main__":
     args = get_args()
 
     GT = get_gt(
-        data_path='/groups/sernam/datasets/vqa/mme/MME_Benchmark_release_version'
+        data_path='data/mme/MME_Benchmark_release_version'
     )
 
     result_folder = args.result_folder
