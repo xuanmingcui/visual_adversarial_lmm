@@ -22,12 +22,8 @@ datasets:
           name: "blip_question"
     build_info:
         images:
-            storage: "/groups/sernam/datasets/coco"
-        # annotations:
-        #     val:
-        #       storage: 
-        #         - "/groups/sernam/datasets/coco/coco_val2014_subset1000.jsonl"
-        #         - "/groups/sernam/datasets/vqa/vqav2/v2_mscoco_val2014_annotations.json"
+            storage: "datasets/coco" # storage path for images
+
 
 
 run:

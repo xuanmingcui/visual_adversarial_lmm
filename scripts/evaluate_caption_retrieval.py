@@ -195,7 +195,7 @@ def main(args):
     for k, x in zip(k_vals, i2t):
         print(f" R@{k}: {100*x:.2f}%")
 
-    with open("/groups/sernam/adv_llava/results/coco_caption_results.txt", "a+") as f:
+    with open("results/coco_caption_results.txt", "a+") as f:
         for k, v in vars(args).items():
             f.write(f"{k}: {v}\n")
 

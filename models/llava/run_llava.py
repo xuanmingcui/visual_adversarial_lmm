@@ -18,8 +18,6 @@ DEFAULT_IMAGE_PATCH_TOKEN = "<im_patch>"
 DEFAULT_IM_START_TOKEN = "<im_start>"
 DEFAULT_IM_END_TOKEN = "<im_end>"
 
-coco_context = json.load(open('/groups/sernam/datasets/coco/coco_val2014_class_descriptions.json'))
-
 # unwanted_words = ['sure', 'okay', 'yes', 'of course', 'yeah', 'no problem']
 
 def run_LLaVA(args, llava_model, llava_tokenizer, image_tensor, text=None, vqa=False):
@@ -228,10 +226,9 @@ def run_llava2_multi_qs(model, tokenizer, image_tensor, classes, contexts = None
 if __name__ == '__main__':
     model_name = get_model_name_from_path('liuhaotian/llava-v1.5-13b')
     tokenizer, model, image_processor, context_len = load_pretrained_model('liuhaotian/llava-v1.5-13b', None, model_name)
-    # image = Image.open('/groups/sernam/datasets/imagenet/val/ILSVRC2012_val_00000001.JPEG')
     # image_tensor = image_processor.preprocess(image, return_tensors='pt')['pixel_values'][0].unsqueeze(0).cuda().half()
     filename = 'COCO_val2014_000000491497'
-    adv_filename = os.path.join('/groups/sernam/adv_llava/adv_datasets/coco/retrieval_mean/APGD/clip336_attack_params:default_289152', f'{filename}.pt')
+    adv_filename = os.path.join('adv_datasets/coco/retrieval_mean/APGD/clip336_attack_params:default_289152', f'{filename}.pt')
     image_tensor = torch.load(adv_filename)
     images = image_tensor.unsqueeze(0).half().cuda()
     # classes = ['snake', 'dog', 'cat', 'bird', 'fish', 'horse', 'cow', 'sheep', 'elephant']
